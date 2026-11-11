@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANGLUNE — un hommage 3D à Bloodwych</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- HUD en jeu -->
+<div id="hud" class="hidden">
+  <div id="leftpanel">
+    <div id="portrait"><span id="portrait-icon">🧙</span></div>
+    <div id="pstats">
+      <div id="pname">—</div>
+      <div id="plevel">Niv. 1</div>
+      <div class="bar hp"><div id="hpfill" class="fill"></div><span id="hptxt" class="barlabel"></span></div>
+      <div class="bar mana"><div id="manafill" class="fill"></div><span id="manatxt" class="barlabel"></span></div>
+      <div class="bar xp"><div id="xpfill" class="fill"></div></div>
+      <div id="resline"><span id="gold">🪙 0</span> · <span id="potioncount">🧪 0</span> <span class="hint">[H]</span></div>
+    </div>
+  </div>
+  <div id="party"></div>
+
+  <div id="questtracker">
+    <div id="qt-title">Quête</div>
+    <div id="qt-text">—</div>
+  </div>
+
+  <div id="bossbar" class="hidden">
+    <div id="bossname">ZENDRICK LE TRAÎTRE</div>
+    <div class="bar boss"><div id="bossfill" class="fill"></div></div>
+  </div>
+
+  <div id="bottombar">
+    <div id="buffs"></div>
+    <div id="spellprep">Sort préparé : <b id="prepname">aucun</b> <span class="hint">[F] lancer · [Tab] grimoire</span></div>
+  </div>
+
+  <div id="gems">
+    <span class="gem dragon" id="gem_dragon" title="Gemme Dragon">◆ 0</span>
+    <span class="gem lune" id="gem_lune" title="Gemme Lune">◆ 0</span>
+    <span class="gem serpent" id="gem_serpent" title="Gemme Serpent">◆ 0</span>
+    <span class="gem chaos" id="gem_chaos" title="Gemme Chaos">◆ 0</span>
+  </div>
+  <div id="keys"></div>
+
+  <div id="crosshair">·</div>
+  <div id="prompt" class="hidden"></div>
+  <div id="toasts"></div>
+  <div id="floaters"></div>
+  <div id="vignette"></div>
+</div>
+
+<!-- Grimoire -->
+<div id="spellbook" class="panel hidden">
+  <h2>📖 Grimoire</h2>
+  <div class="panel-hint">Clic : préparer le sort · Double-clic : lancer · <b>F</b> : lancer le préparé</div>
+  <div id="spellbook-list"></div>
+</div>
+
+<!-- Inventaire -->
+<div id="inventory" class="panel hidden">
+  <h2>🎒 Inventaire</h2>
+  <div id="inv-content"></div>
+</div>
+
+<!-- Journal -->
+<div id="questlog" class="panel hidden">
+  <h2>📜 Journal de quête</h2>
+  <div id="questlog-list"></div>
+</div>
+
+<!-- Dialogue PNJ -->
+<div id="dialog" class="panel hidden">
+  <div id="dlg-name">—</div>
+  <div id="dlg-text">—</div>
+  <div id="dlg-options"></div>
+</div>
+
+<!-- Écran titre -->
+<div id="title">
+  <h1>SANGLUNE</h1>
+  <div class="subtitle">un hommage 3D à Bloodwych (1989)</div>
+  <div class="choose-label">Choisissez votre champion :</div>
+  <div id="title-champs"></div>
+  <button id="btn-play" disabled>⚔ Jouer</button>
+  <div id="controls">
+    ZQSD/WASD : se déplacer · Souris : caméra · Clic G : attaquer · Clic D : bloquer ·
+    Espace : sauter · Maj : courir · <b>F</b> : lancer le sort préparé ·
+    Tab : grimoire · E : parler / interagir · I : inventaire · J : journal ·
+    H : potion de soin · M : son · Échap : pause<br>
+    Objectif : ramenez les <b>4 cristaux</b> à l'autel du château, puis terrassez <b>Zendrick</b>.
+  </div>
+</div>
+
+<!-- Mort -->
+<div id="death" class="overlay hidden">
+  <h1>VOUS ÊTES MORT</h1>
+  <p>Les ténèbres vous emportent… mais le village de Sanglune veille sur vous.</p>
+  <button id="btn-respawn">Se relever au village</button>
+</div>
+
+<!-- Victoire -->
+<div id="win" class="overlay hidden">
+  <h1>🏆 VICTOIRE</h1>
+  <p>Zendrick est vaincu. Les cristaux sont rendus, la paix revient sur Trazère.</p>
+  <p id="win-time"></p>
+  <button id="btn-restart">Rejouer</button>
+</div>
+
+<!-- Pause -->
+<div id="pause" class="overlay hidden">
+  <h1>PAUSE</h1>
+  <button id="btn-resume">Reprendre</button>
+  <button id="btn-mute">Son : ON</button>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "sanglune",
+  "version": "0.1.0",
+  "description": "Hommage 3D navigateur à Bloodwych (1989) — monde ouvert médiéval-fantastique",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "check": "node --check js/main.js && node --check js/game.js && node --check js/ui.js && node --check js/world.js && node --check js/actors.js && node --check js/data.js && node --check js/util.js",
+    "test": "node test/logic.test.mjs"
+  }
+}
